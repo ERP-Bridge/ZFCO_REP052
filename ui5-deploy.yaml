@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "4.0"
+
+metadata:
+  name: zfcorep052
+
+type: application
+
+framework:
+  name: SAPUI5
+  version: "1.151.0"
+  libraries:
+    - name: sap.m
+    - name: sap.ui.core
+    - name: sap.ui.export
+    - name: sap.ushell
+    - name: themelib_sap_horizon
+
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          destination: DSE_100_Client
+          url: http://dseci.sap.eu.sodexonet.com:21
+          client: '100'
+        app:
+          name: ZFCO_REP052
+          package: ZFCO_REP050
+          transport: DSEK900656
+        exclude:
+          - /test/
+          - /localService/

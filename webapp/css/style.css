@@ -1,0 +1,532 @@
+/* ================================================================ */
+/* App 2: EPM Validation and Approval                                */
+/* ================================================================ */
+
+/* ---------------------------------------------------------------- */
+/* General page layout                                              */
+/* ---------------------------------------------------------------- */
+
+.validatorPageContent,
+.requestDetailContent {
+    width: 100%;
+    min-height: 100%;
+    padding: 1rem 1.5rem 1.5rem;
+    box-sizing: border-box;
+    background-color: #f5f6f7;
+}
+
+/* ---------------------------------------------------------------- */
+/* Validator worklist header                                        */
+/* ---------------------------------------------------------------- */
+
+.validatorHeaderToolbar {
+    min-height: 3.5rem;
+    padding: 0.25rem 0.75rem;
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 0.5rem 0.5rem 0 0;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+}
+
+.validatorHeaderToolbar .sapMTitle {
+    color: #1d2d3e;
+    font-weight: 600;
+}
+
+.validatorHeaderToolbar .sapMSFF {
+    border-radius: 0.375rem;
+}
+
+/* ---------------------------------------------------------------- */
+/* Identity information message                                    */
+/* ---------------------------------------------------------------- */
+
+#identityMessage {
+    border-radius: 0.375rem;
+}
+
+/* ---------------------------------------------------------------- */
+/* Validator request table                                          */
+/* ---------------------------------------------------------------- */
+
+.validatorRequestTable {
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-top: none;
+    border-radius: 0 0 0.5rem 0.5rem;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+.validatorRequestTable .sapMListTblHeaderCell {
+    height: 2.75rem;
+    background-color: #f0f3f5;
+    border-bottom: 1px solid #ccd3d8;
+    vertical-align: middle;
+}
+
+.validatorRequestTable .sapMListTblHeaderCell .sapMText {
+    color: #1d2d3e;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.validatorRequestTable .sapMListTblCell {
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+    vertical-align: middle;
+}
+
+.validatorRequestTable .sapMLIB {
+    background-color: #ffffff;
+}
+
+.validatorRequestTable .sapMLIB:hover {
+    background-color: #f5f9fc;
+}
+
+.validatorRequestTable .sapMLIBSelected {
+    background-color: #eaf3f8;
+}
+
+.validatorRequestTable .sapMObjectIdentifierTitle {
+    color: #0064d9;
+    font-weight: 600;
+}
+
+.validatorRequestTable .sapMObjStatus {
+    white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- */
+/* Request detail header                                            */
+/* ---------------------------------------------------------------- */
+
+.requestDetailHeader {
+    width: 100%;
+    min-height: 4.5rem;
+    padding: 1rem 1.25rem;
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+}
+
+.requestDetailHeader .sapMTitle {
+    color: #1d2d3e;
+    font-weight: 600;
+}
+
+.requestDetailHeader .sapMObjStatus {
+    margin-top: 0.25rem;
+    white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- */
+/* Request metadata                                                 */
+/* ---------------------------------------------------------------- */
+
+.requestMetadataBar {
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+}
+
+.requestMetadataBar .sapMObjectAttributeDiv {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.requestMetadataBar .sapMObjectAttributeTitle {
+    color: #556b82;
+    font-weight: 600;
+}
+
+.requestMetadataBar .sapMObjectAttributeText {
+    color: #1d2d3e;
+}
+
+/* ---------------------------------------------------------------- */
+/* Request detail tab bar                                           */
+/* ---------------------------------------------------------------- */
+
+.requestDetailTabs {
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+.requestDetailTabs .sapMITBHead {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.requestDetailTabs .sapMITBFilter {
+    min-width: 7rem;
+}
+
+.requestDetailTabs .sapMITBText {
+    font-weight: 500;
+}
+
+.requestDetailTabs .sapMITBSelected .sapMITBText {
+    font-weight: 600;
+}
+
+.requestDetailTabs .sapMITBContent {
+    padding: 0.75rem 1rem 1rem;
+    background-color: #ffffff;
+    border-bottom: none;
+}
+
+/* ---------------------------------------------------------------- */
+/* Dynamically generated object tables                              */
+/* ---------------------------------------------------------------- */
+
+.validatorObjectContent {
+    width: 100%;
+    min-width: 100%;
+    padding: 0.5rem 0;
+    box-sizing: border-box;
+}
+
+.validatorObjectContent .sapMListTbl {
+    background-color: #ffffff;
+    border-collapse: separate;
+}
+
+.validatorObjectContent .sapMListTblHeaderCell {
+    height: 3rem;
+    padding: 0.5rem;
+    background-color: #f0f3f5;
+    border-bottom: 1px solid #ccd3d8;
+    vertical-align: middle;
+}
+
+.validatorObjectContent .sapMListTblHeaderCell .sapMLabel {
+    color: #1d2d3e;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.validatorObjectContent .sapMListTblCell {
+    padding: 0.5rem;
+    vertical-align: middle;
+}
+
+.validatorObjectContent .sapMListTblCell .sapMText {
+    color: #32363a;
+    font-size: 0.8125rem;
+}
+
+.validatorObjectContent .sapMLIB:nth-child(even) {
+    background-color: #fafbfc;
+}
+
+.validatorObjectContent .sapMLIB:hover {
+    background-color: #f5f9fc;
+}
+
+/* ---------------------------------------------------------------- */
+/* Attachment table                                                 */
+/* ---------------------------------------------------------------- */
+
+.requestDetailTabs .sapMMessageStrip {
+    margin-bottom: 0.75rem;
+    border-radius: 0.375rem;
+}
+
+.requestDetailTabs .sapMListTblHeaderCell {
+    background-color: #f0f3f5;
+}
+
+.requestDetailTabs .sapMListTblHeaderCell .sapMText {
+    color: #1d2d3e;
+    font-weight: 600;
+}
+
+.requestDetailTabs .sapMLnk {
+    color: #0064d9;
+    font-weight: 500;
+}
+
+/* ---------------------------------------------------------------- */
+/* Footer action toolbar                                            */
+/* ---------------------------------------------------------------- */
+
+.requestDetailContent + .sapMPageFooter {
+    border-top: 1px solid #d9d9d9;
+}
+
+#requestDetailPage-footer {
+    background-color: #ffffff;
+    border-top: 1px solid #d9d9d9;
+    box-shadow: 0 -0.125rem 0.5rem rgba(0, 0, 0, 0.05);
+}
+
+#approveButton {
+    min-width: 7rem;
+}
+
+#rejectButton {
+    min-width: 7rem;
+}
+
+/* ---------------------------------------------------------------- */
+/* Busy state and empty state                                       */
+/* ---------------------------------------------------------------- */
+
+.validatorRequestTable .sapMListNoData,
+.requestDetailTabs .sapMListNoData {
+    min-height: 5rem;
+    color: #556b82;
+    background-color: #ffffff;
+}
+
+/* ---------------------------------------------------------------- */
+/* Compact desktop layout                                           */
+/* ---------------------------------------------------------------- */
+
+.sapUiSizeCompact .validatorHeaderToolbar .sapMBtn {
+    margin-left: 0.25rem;
+}
+
+.sapUiSizeCompact .validatorRequestTable .sapMListTblCell,
+.sapUiSizeCompact .validatorObjectContent .sapMListTblCell {
+    min-height: 2.5rem;
+}
+
+/* ---------------------------------------------------------------- */
+/* Responsive tablet layout                                         */
+/* ---------------------------------------------------------------- */
+
+@media only screen and (max-width: 1024px) {
+    .validatorPageContent,
+    .requestDetailContent {
+        padding: 0.75rem;
+    }
+
+    .validatorHeaderToolbar {
+        min-height: 3rem;
+    }
+
+    .requestDetailHeader,
+    .requestMetadataBar {
+        padding: 0.875rem;
+    }
+
+    .requestDetailTabs .sapMITBContent {
+        padding: 0.5rem 0.75rem 0.75rem;
+    }
+}
+
+/* ---------------------------------------------------------------- */
+/* Responsive mobile layout                                         */
+/* ---------------------------------------------------------------- */
+
+@media only screen and (max-width: 600px) {
+    .validatorPageContent,
+    .requestDetailContent {
+        padding: 0.5rem;
+    }
+
+    .validatorHeaderToolbar {
+        padding: 0.25rem;
+        border-radius: 0.375rem 0.375rem 0 0;
+    }
+
+    .validatorHeaderToolbar .sapMSFF {
+        width: 100% !important;
+    }
+
+    .requestDetailHeader,
+    .requestMetadataBar,
+    .requestDetailTabs {
+        border-radius: 0.375rem;
+    }
+
+    .requestDetailHeader {
+        padding: 0.75rem;
+    }
+
+    .requestMetadataBar {
+        padding: 0.75rem;
+    }
+
+    .requestMetadataBar .sapMObjectAttributeDiv {
+        width: 100%;
+        margin-right: 0 !important;
+        margin-bottom: 0.5rem;
+    }
+
+    .requestDetailTabs .sapMITBFilter {
+        min-width: auto;
+    }
+
+    .requestDetailTabs .sapMITBContent {
+        padding: 0.375rem;
+    }
+
+    .validatorObjectContent {
+        padding: 0.25rem 0;
+    }
+}
+
+/* ---------------------------------------------------------------- */
+/* Printing                                                         */
+/* ---------------------------------------------------------------- */
+
+@media print {
+    .validatorHeaderToolbar,
+    #requestDetailPage-footer,
+    #identityMessage {
+        display: none !important;
+    }
+
+    .validatorPageContent,
+    .requestDetailContent {
+        padding: 0;
+        background-color: #ffffff;
+    }
+
+    .requestDetailHeader,
+    .requestMetadataBar,
+    .requestDetailTabs {
+        border: none;
+        box-shadow: none;
+    }
+}
+/* ================================================================ */
+/* Status Badges */
+/* ================================================================ */
+
+.statusExecuted {
+    background: #E8F5E9;
+    color: #2E7D32;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.statusLevel1 {
+    background: #FFF3E0;
+    color: #EF6C00;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.statusLevel2 {
+    background: #F3E5F5;
+    color: #7B1FA2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.statusLevel3 {
+    background: #F3E5F5;
+    color: #8E24AA;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.statusRejected {
+    background: #FFEBEE;
+    color: #D32F2F;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.statusClosed {
+    background: #F5F5F5;
+    color: #616161;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.statusDraft {
+    background: #EEEEEE;
+    color: #424242;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}.sapMObjStatus.statusExecuted .sapMObjStatusText{
+    background:#E8F5E9;
+    color:#2E7D32;
+    padding:4px 8px;
+    border-radius:4px;
+}
+
+.sapMObjStatus.statusLevel1 .sapMObjStatusText{
+    background:#FFF3E0;
+    color:#EF6C00;
+    padding:4px 8px;
+    border-radius:4px;
+}
+
+.sapMObjStatus.statusLevel2 .sapMObjStatusText{
+    background:#F3E5F5;
+    color:#7B1FA2;
+    padding:4px 8px;
+    border-radius:4px;
+}
+
+.sapMObjStatus.statusLevel3 .sapMObjStatusText{
+    background:#F3E5F5;
+    color:#8E24AA;
+    padding:4px 8px;
+    border-radius:4px;
+}
+
+.sapMObjStatus.statusRejected .sapMObjStatusText{
+    background:#FFEBEE;
+    color:#D32F2F;
+    padding:4px 8px;
+    border-radius:4px;
+}
+
+.sapMObjStatus.statusClosed .sapMObjStatusText{
+    background:#F5F5F5;
+    color:#616161;
+    padding:4px 8px;
+    border-radius:4px;
+}
+.sapMObjStatus {
+    white-space: nowrap !important;
+}
+
+.sapMObjStatusText {
+    white-space: nowrap !important;
+}
+
+.sapMObjStatus {
+    min-width: 160px;
+}

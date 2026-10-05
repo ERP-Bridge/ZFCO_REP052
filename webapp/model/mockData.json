@@ -1,0 +1,205 @@
+{
+  "items": [
+    {
+      "requestId": "REQ000123",
+      "actionTypeDescription": "Create Profit Centers, Cost Centers and Sites",
+      "country": "US",
+      "submissionDate": "02-Mar-2026",
+      "submittedBy": "John Doe",
+      "statusKey": "EXECUTED",
+      "status": "Executed",
+      "spoolNumber": "PBF-000123"
+    },
+    {
+      "requestId": "REQ000124",
+      "actionTypeDescription": "Create all controlling elements for a new signed contract",
+      "country": "US",
+      "submissionDate": "03-Mar-2026",
+      "submittedBy": "John Doe",
+      "statusKey": "VALIDATION_L1",
+      "status": "In Validation - Level 1",
+      "spoolNumber": ""
+    },
+    {
+      "requestId": "REQ000125",
+      "actionTypeDescription": "Create New Sites",
+      "country": "CA",
+      "submissionDate": "03-Mar-2026",
+      "submittedBy": "John Doe",
+      "statusKey": "VALIDATION_L2",
+      "status": "In Validation - Level 2",
+      "spoolNumber": ""
+    },
+    {
+      "requestId": "REQ000126",
+      "actionTypeDescription": "Maintain Profit Center",
+      "country": "US",
+      "submissionDate": "04-Mar-2026",
+      "submittedBy": "John Doe",
+      "statusKey": "VALIDATION_L3",
+      "status": "In Validation - Level 3 (MDM)",
+      "spoolNumber": ""
+    },
+    {
+      "requestId": "REQ000127",
+      "actionTypeDescription": "Maintain Project and WBS",
+      "country": "UK",
+      "submissionDate": "05-Mar-2026",
+      "submittedBy": "John Doe",
+      "statusKey": "REJECTED",
+      "status": "Rejected",
+      "spoolNumber": ""
+    },
+    {
+      "requestId": "REQ000128",
+      "actionTypeDescription": "Create Profit Centers and Sites",
+      "country": "US",
+      "submissionDate": "05-Mar-2026",
+      "submittedBy": "John Doe",
+      "statusKey": "CLOSED",
+      "status": "Closed",
+      "spoolNumber": "PBF-000128"
+    },
+    {
+      "requestId": "REQ000129",
+      "actionTypeDescription": "Create Cost Center",
+      "country": "DE",
+      "submissionDate": "06-Mar-2026",
+      "submittedBy": "John Doe",
+      "statusKey": "EXECUTED",
+      "status": "Executed",
+      "spoolNumber": "CC-000129"
+    },
+    {
+      "requestId": "REQ000130",
+      "actionTypeDescription": "Maintain Cost Center",
+      "country": "FR",
+      "submissionDate": "06-Mar-2026",
+      "submittedBy": "John Doe",
+      "statusKey": "VALIDATION_L1",
+      "status": "In Validation - Level 1",
+      "spoolNumber": ""
+    },
+    {
+      "requestId": "REQ000131",
+      "actionTypeDescription": "Create Profit Center",
+      "country": "IN",
+      "submissionDate": "07-Mar-2026",
+      "submittedBy": "John Doe",
+      "statusKey": "EXECUTED",
+      "status": "Executed",
+      "spoolNumber": "PC-000131"
+    },
+    {
+      "requestId": "REQ000132",
+      "actionTypeDescription": "Close Sites",
+      "country": "AU",
+      "submissionDate": "08-Mar-2026",
+      "submittedBy": "John Doe",
+      "statusKey": "CLOSED",
+      "status": "Closed",
+      "spoolNumber": "SITE-000132"
+    },
+
+    {
+      "requestId": "REQ000133",
+      "actionTypeDescription": "Create Profit Centers, Cost Centers and Sites",
+      "country": "US",
+      "submissionDate": "09-Mar-2026",
+      "submittedBy": "Jane Smith",
+      "statusKey": "EXECUTED",
+      "status": "Executed",
+      "spoolNumber": "PBF-000133"
+    },
+    {
+      "requestId": "REQ000134",
+      "actionTypeDescription": "Create all controlling elements for a new signed contract",
+      "country": "US",
+      "submissionDate": "09-Mar-2026",
+      "submittedBy": "Jane Smith",
+      "statusKey": "VALIDATION_L1",
+      "status": "In Validation - Level 1",
+      "spoolNumber": ""
+    },
+    {
+      "requestId": "REQ000135",
+      "actionTypeDescription": "Create New Sites",
+      "country": "CA",
+      "submissionDate": "10-Mar-2026",
+      "submittedBy": "Jane Smith",
+      "statusKey": "VALIDATION_L2",
+      "status": "In Validation - Level 2",
+      "spoolNumber": ""
+    },
+    {
+      "requestId": "REQ000136",
+      "actionTypeDescription": "Maintain Profit Center",
+      "country": "US",
+      "submissionDate": "10-Mar-2026",
+      "submittedBy": "Jane Smith",
+      "statusKey": "VALIDATION_L3",
+      "status": "In Validation - Level 3 (MDM)",
+      "spoolNumber": ""
+    },
+    {
+      "requestId": "REQ000137",
+      "actionTypeDescription": "Maintain Project and WBS",
+      "country": "UK",
+      "submissionDate": "11-Mar-2026",
+      "submittedBy": "Jane Smith",
+      "statusKey": "REJECTED",
+      "status": "Rejected",
+      "spoolNumber": ""
+    },
+    {
+      "requestId": "REQ000138",
+      "actionTypeDescription": "Create Profit Centers and Sites",
+      "country": "US",
+      "submissionDate": "11-Mar-2026",
+      "submittedBy": "Jane Smith",
+      "statusKey": "CLOSED",
+      "status": "Closed",
+      "spoolNumber": "PBF-000138"
+    },
+    {
+      "requestId": "REQ000139",
+      "actionTypeDescription": "Create Cost Center",
+      "country": "DE",
+      "submissionDate": "12-Mar-2026",
+      "submittedBy": "Jane Smith",
+      "statusKey": "EXECUTED",
+      "status": "Executed",
+      "spoolNumber": "CC-000139"
+    },
+    {
+      "requestId": "REQ000140",
+      "actionTypeDescription": "Maintain Cost Center",
+      "country": "FR",
+      "submissionDate": "12-Mar-2026",
+      "submittedBy": "Jane Smith",
+      "statusKey": "VALIDATION_L1",
+      "status": "In Validation - Level 1",
+      "spoolNumber": ""
+    },
+    {
+      "requestId": "REQ000141",
+      "actionTypeDescription": "Create Profit Center",
+      "country": "IN",
+      "submissionDate": "13-Mar-2026",
+      "submittedBy": "Jane Smith",
+      "statusKey": "EXECUTED",
+      "status": "Executed",
+      "spoolNumber": "PC-000141"
+    },
+    {
+      "requestId": "REQ000142",
+      "actionTypeDescription": "Close Sites",
+      "country": "AU",
+      "submissionDate": "13-Mar-2026",
+      "submittedBy": "Jane Smith",
+      "statusKey": "CLOSED",
+      "status": "Closed",
+      "spoolNumber": "SITE-000142"
+    }
+  ]
+}

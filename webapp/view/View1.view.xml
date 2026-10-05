@@ -1,0 +1,130 @@
+<mvc:View
+    controllerName="zfcorep052.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page id="_IDGenPage1" showHeader="false">
+
+        <content>
+
+            <Panel id="_IDGenPanel"
+                class="requestHistoryPanel"
+                backgroundDesign="Transparent">
+
+                <headerToolbar>
+
+                    <OverflowToolbar id="_IDGenOverflowToolbar">
+
+                        <Title
+                            id="requestHistoryTitle"
+                            text="Submitted Requests"/>
+
+                        <ToolbarSpacer id="_IDGenToolbarSpacer"/>
+
+                        <SearchField id="_IDGenSearchField"
+                            width="15rem"
+                            placeholder="Search"
+                            search="onSearchRequests"
+                            liveChange="onSearchRequests"/>
+
+                        <Button id="_IDGenButton"
+                            text="Export"
+                            icon="sap-icon://excel-attachment"
+                            press="onExport"/>
+
+                        <Button id="_IDGenButton1"
+                            icon="sap-icon://refresh"
+                            press="onRefresh"/>
+
+                    </OverflowToolbar>
+
+                </headerToolbar>
+
+                <content>
+
+                    <Table
+                        id="requestsTable"
+                items="{requests>/filteredItems}"
+                        growing="true"
+                        growingThreshold="10"
+                        updateFinished="onTableUpdateFinished">
+
+                        <columns>
+
+                            <Column id="_IDGenColumn">
+                                <Text id="_IDGenText" text="Req ID"/>
+                            </Column>
+
+                            <Column id="_IDGenColumn1" width="22rem">
+                                <Text id="_IDGenText1" text="Action Type"/>
+                            </Column>
+
+                            <Column id="_IDGenColumn2">
+                                <Text id="_IDGenText2" text="Country"/>
+                            </Column>
+
+                            <Column id="_IDGenColumn3">
+                                <Text id="_IDGenText3" text="Submission Date"/>
+                            </Column>
+
+                            <Column id="_IDGenColumn4"  >
+                                <Text id="_IDGenText4" text="Submitted By"/>
+                            </Column>
+
+                            <Column id="_IDGenColumn5" width="16rem" >
+                                <Text id="_IDGenText5" text="Status" />
+                            </Column>
+
+                            <Column id="_IDGenColumn6">
+                                <Text id="_IDGenText6" text="Spool Number"/>
+                            </Column>
+
+                        </columns>
+
+                        <items>
+
+                            <ColumnListItem id="_IDGenColumnListItem"
+                                type="Navigation"
+                                press="onRequestPress">
+
+                                <cells>
+
+                                    <Link id="_IDGenLink"
+                                        text="{requests>requestId}"
+                                        press="onRequestIdPress"/>
+
+                                    <Text id="_IDGenText7"
+                                      text="{requests>actionTypeDisplay}"/>
+
+                                    <Text id="_IDGenText8"
+                                        text="{requests>country}"/>
+
+                                    <Text id="_IDGenText9"
+                                        text="{requests>submissionDate}"/>
+
+                                    <Text id="_IDGenText10"
+                                        text="{requests>submittedBy}"/>
+                                   <ObjectStatus id="_IDGenObjectStatus"
+    text="{requests>status}"
+    state="{requests>statusState}"
+    inverted="true"/>
+                                    <Text id="_IDGenText11"
+                                        text="{requests>spoolNumber}"/>
+
+                                </cells>
+
+                            </ColumnListItem>
+
+                        </items>
+
+                    </Table>
+
+                </content>
+
+            </Panel>
+
+        </content>
+
+    </Page>
+
+</mvc:View>
