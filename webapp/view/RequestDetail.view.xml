@@ -204,7 +204,7 @@
     </items>
 
 </IconTabBar>
-<Link id="_IDGenLink3"
+<Link id="_IDGenLink32"
     text="Click to view simulation log"
     visible="{detail>/showSimulationLink}"
     press="onViewSimulationLog"/>
