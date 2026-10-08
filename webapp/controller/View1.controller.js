@@ -116,8 +116,8 @@ sap.ui.define([
                 ),
                 submittedBy: oHeader.SubmittedBy || "",
                 status: oStatus.text,
-statusState: oStatus.state,
-statusClass: oStatus.statusClass,
+                statusState: oStatus.state,
+                statusClass: oStatus.statusClass,
                 spoolNumber: this._formatSpoolNumber(
                     oHeader.SpoolNumber
                 ),
@@ -411,59 +411,59 @@ statusClass: oStatus.statusClass,
             return sWorkflowStep.padStart(3, "0");
         },
 
-       _getStatusForStep: function (sWorkflowStep) {
+        _getStatusForStep: function (sWorkflowStep) {
 
-    var mWorkflowStatuses = {
+            var mWorkflowStatuses = {
 
-        "005": {
-            text: "Draft",
-            state: "None",
-            statusClass: "statusDraft"
+                "005": {
+                    text: "Draft",
+                    state: "None",
+                    statusClass: "statusDraft"
+                },
+
+                "020": {
+                    text: "In Validation - Level 1",
+                    state: "Warning",
+                    statusClass: "statusLevel1"
+                },
+
+                "030": {
+                    text: "In Validation - Level 2",
+                    state: "Information",
+                    statusClass: "statusLevel2"
+                },
+
+                "035": {
+                    text: "In Validation - Level 3 (MDM)",
+                    state: "Information",
+                    statusClass: "statusLevel3"
+                },
+
+                "050": {
+                    text: "Executed",
+                    state: "Success",
+                    statusClass: "statusExecuted"
+                },
+
+                "055": {
+                    text: "Rejected",
+                    state: "Error",
+                    statusClass: "statusRejected"
+                },
+
+                "060": {
+                    text: "Closed",
+                    state: "None",
+                    statusClass: "statusClosed"
+                }
+            };
+
+            return mWorkflowStatuses[sWorkflowStep] || {
+                text: "Unknown",
+                state: "None",
+                statusClass: "statusClosed"
+            };
         },
-
-        "020": {
-            text: "In Validation - Level 1",
-            state: "Warning",
-            statusClass: "statusLevel1"
-        },
-
-        "030": {
-            text: "In Validation - Level 2",
-            state: "Information",
-            statusClass: "statusLevel2"
-        },
-
-        "035": {
-            text: "In Validation - Level 3 (MDM)",
-            state: "Information",
-            statusClass: "statusLevel3"
-        },
-
-        "050": {
-            text: "Executed",
-            state: "Success",
-            statusClass: "statusExecuted"
-        },
-
-        "055": {
-            text: "Rejected",
-            state: "Error",
-            statusClass: "statusRejected"
-        },
-
-        "060": {
-            text: "Closed",
-            state: "None",
-            statusClass: "statusClosed"
-        }
-    };
-
-    return mWorkflowStatuses[sWorkflowStep] || {
-        text: "Unknown",
-        state: "None",
-        statusClass: "statusClosed"
-    };
-},
 
         _getActionTypeDisplay: function (
             sActionType

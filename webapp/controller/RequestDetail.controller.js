@@ -7,14 +7,14 @@ sap.ui.define([
     "sap/m/Text",
     "sap/m/Label",
     "sap/m/MessageBox",
-"sap/m/MessageToast",
-"sap/ui/core/routing/History",
-"sap/m/Dialog",
-"sap/m/TextArea",
-"sap/m/Button",
-"sap/m/VBox",
-"sap/ui/core/BusyIndicator",
-"sap/m/Input"
+    "sap/m/MessageToast",
+    "sap/ui/core/routing/History",
+    "sap/m/Dialog",
+    "sap/m/TextArea",
+    "sap/m/Button",
+    "sap/m/VBox",
+    "sap/ui/core/BusyIndicator",
+    "sap/m/Input"
 ], function (
     Controller,
     JSONModel,
@@ -24,14 +24,14 @@ sap.ui.define([
     Text,
     Label,
     MessageBox,
-MessageToast,
-History,
-Dialog,
-TextArea,
-Button,
-VBox,
-BusyIndicator,
-Input
+    MessageToast,
+    History,
+    Dialog,
+    TextArea,
+    Button,
+    VBox,
+    BusyIndicator,
+    Input
 ) {
     "use strict";
 
@@ -133,7 +133,7 @@ Input
                         this._getStatusForStep(
                             sWorkflowStep
                         );
-                        console.log("Workflow Step:", sWorkflowStep);
+                    console.log("Workflow Step:", sWorkflowStep);
 
                     var sActionType = String(
                         oHeader.ActionType || ""
@@ -177,23 +177,23 @@ Input
 
                     oDetailData.statusState =
                         oStatus.state;
-                        oDetailData.simulationStatus =
-    oHeader.SIM_STATUS || "";
+                    oDetailData.simulationStatus =
+                        oHeader.SIM_STATUS || "";
 
-oDetailData.simulationSpoolNumber =
-    oHeader.SIM_SPOOL_NO || "";
+                    oDetailData.simulationSpoolNumber =
+                        oHeader.SIM_SPOOL_NO || "";
 
-oDetailData.simulationLogUrl =
-    oHeader.SimulationLogUrl || "";
+                    oDetailData.simulationLogUrl =
+                        oHeader.SimulationLogUrl || "";
 
-oDetailData.showSimulationLink =
-    !!oDetailData.simulationSpoolNumber;
-                        oDetailData.showSimulateButton =
-    sWorkflowStep === "035";
+                    oDetailData.showSimulationLink =
+                        !!oDetailData.simulationSpoolNumber;
+                    oDetailData.showSimulateButton =
+                        sWorkflowStep === "035";
 
-oDetailData.showCloseButton =
-    sWorkflowStep === "035";
-    
+                    oDetailData.showCloseButton =
+                        sWorkflowStep === "035";
+
 
                     oDetailData.createdBy =
                         oHeader.CreatedBy || "";
@@ -243,26 +243,27 @@ oDetailData.showCloseButton =
                             sObjectKey
                         ] = aRows.length > 0;
 
-                       if (
-    sWorkflowStep === "035" &&
-    this.getView()
-        .getModel("state")
-        .getProperty("/editMode")
-) {
+                        if (
+                            sWorkflowStep === "035" &&
+                            this.getView()
+                                .getModel("state")
+                                .getProperty("/editMode")
+                        ) {
 
-    this._renderEditableTable(
-        sObjectKey,
-        aRows
-    );
+                            this._renderEditableTable(
+                                sObjectKey,
+                                aRows
+                            );
 
-} else {
+                        } else {
 
-    this._renderReadOnlyTable(
-        sObjectKey,
-        aRows
-    );
+                            this._renderReadOnlyTable(
+                                sObjectKey,
+                                aRows
+                            );
 
-}}
+                        }
+                    }
 
                     oDetailModel.setData(oDetailData);
 
@@ -320,7 +321,7 @@ oDetailData.showCloseButton =
             ) {
                 var oConfiguration =
                     this._getEntityConfiguration()[
-                        sObjectKey
+                    sObjectKey
                     ];
 
                 var oContainer = this.byId(
@@ -383,7 +384,7 @@ oDetailData.showCloseButton =
                                     return new Text({
                                         text: this._formatDisplayValue(
                                             oRow[
-                                                sPropertyName
+                                            sPropertyName
                                             ]
                                         ),
                                         wrapping: true,
@@ -403,107 +404,107 @@ oDetailData.showCloseButton =
 
                 oContainer.addItem(oTable);
             },
-_renderEditableTable: function (
-    sObjectKey,
-    aRows
-) {
+            _renderEditableTable: function (
+                sObjectKey,
+                aRows
+            ) {
 
-    var oConfiguration =
-        this._getEntityConfiguration()[
-            sObjectKey
-        ];
+                var oConfiguration =
+                    this._getEntityConfiguration()[
+                    sObjectKey
+                    ];
 
-    var oContainer =
-        this.byId(
-            oConfiguration.containerId
-        );
+                var oContainer =
+                    this.byId(
+                        oConfiguration.containerId
+                    );
 
-    if (!oContainer) {
-        return;
-    }
+                if (!oContainer) {
+                    return;
+                }
 
-    oContainer.destroyItems();
+                oContainer.destroyItems();
 
-    if (!aRows || aRows.length === 0) {
-        return;
-    }
+                if (!aRows || aRows.length === 0) {
+                    return;
+                }
 
-    var aProperties =
-        this._getDisplayProperties(
-            aRows
-        );
+                var aProperties =
+                    this._getDisplayProperties(
+                        aRows
+                    );
 
-    var oTable = new Table({
+                var oTable = new Table({
 
-        width: Math.max(
-            60,
-            aProperties.length * 11
-        ) + "rem",
+                    width: Math.max(
+                        60,
+                        aProperties.length * 11
+                    ) + "rem",
 
-        fixedLayout: true
+                    fixedLayout: true
 
-    });
+                });
 
-    aProperties.forEach(
-        function (sPropertyName) {
-
-            oTable.addColumn(
-                new Column({
-
-                    width: "11rem",
-
-                    header:
-                        new Label({
-
-                            text:
-                                this._getPropertyLabel(
-                                    sPropertyName
-                                )
-
-                        })
-
-                })
-            );
-
-        }.bind(this)
-    );
-
-    aRows.forEach(
-        function (oRow) {
-
-            var aCells =
-                aProperties.map(
+                aProperties.forEach(
                     function (sPropertyName) {
 
-                        return new Input({
+                        oTable.addColumn(
+                            new Column({
 
-                            value:
-                                String(
-                                    oRow[
-                                        sPropertyName
-                                    ] || ""
-                                )
+                                width: "11rem",
 
-                        });
+                                header:
+                                    new Label({
+
+                                        text:
+                                            this._getPropertyLabel(
+                                                sPropertyName
+                                            )
+
+                                    })
+
+                            })
+                        );
+
+                    }.bind(this)
+                );
+
+                aRows.forEach(
+                    function (oRow) {
+
+                        var aCells =
+                            aProperties.map(
+                                function (sPropertyName) {
+
+                                    return new Input({
+
+                                        value:
+                                            String(
+                                                oRow[
+                                                sPropertyName
+                                                ] || ""
+                                            )
+
+                                    });
+
+                                }
+                            );
+
+                        oTable.addItem(
+                            new ColumnListItem({
+
+                                cells: aCells
+
+                            })
+                        );
 
                     }
                 );
 
-            oTable.addItem(
-                new ColumnListItem({
-
-                    cells: aCells
-
-                })
-            );
-
-        }
-    );
-
-    oContainer.addItem(
-        oTable
-    );
-},
+                oContainer.addItem(
+                    oTable
+                );
+            },
             _getDisplayProperties: function (aRows) {
                 var aProperties = [];
 
@@ -617,93 +618,93 @@ _renderEditableTable: function (
                 );
             },
 
-           _executeApprove: async function (sRequestId) {
+            _executeApprove: async function (sRequestId) {
 
-    var oStateModel =
-        this.getView().getModel("state");
+                var oStateModel =
+                    this.getView().getModel("state");
 
-    oStateModel.setProperty("/busy", true);
+                oStateModel.setProperty("/busy", true);
 
-    try {
+                try {
 
-        var oODataModel =
-            this.getOwnerComponent().getModel();
+                    var oODataModel =
+                        this.getOwnerComponent().getModel();
 
-        var sActionPath =
-            "/RequestHeader('" +
-            this._encodeODataKey(sRequestId) +
-            "')/" +
-            "com.sap.gateway.srvd.zui_epm_md_frontend.v0001.ApproveRequest(...)";
+                    var sActionPath =
+                        "/RequestHeader('" +
+                        this._encodeODataKey(sRequestId) +
+                        "')/" +
+                        "com.sap.gateway.srvd.zui_epm_md_frontend.v0001.ApproveRequest(...)";
 
-        var oActionBinding =
-            oODataModel.bindContext(
-                sActionPath,
-                null,
-                {
-                    $$updateGroupId: "$direct"
+                    var oActionBinding =
+                        oODataModel.bindContext(
+                            sActionPath,
+                            null,
+                            {
+                                $$updateGroupId: "$direct"
+                            }
+                        );
+
+                    await oActionBinding.execute("$direct");
+
+                    MessageToast.show(
+                        "Request validated successfully"
+                    );
+
+                    await this._loadRequest(
+                        sRequestId
+                    );
+
+                } catch (oError) {
+
+                    console.error(oError);
+
+                    MessageBox.error(
+                        this._getErrorText(oError)
+                    );
+
+                } finally {
+
+                    oStateModel.setProperty(
+                        "/busy",
+                        false
+                    );
                 }
-            );
+            },
+            onEdit: function () {
 
-        await oActionBinding.execute("$direct");
+                this.getView()
+                    .getModel("state")
+                    .setProperty(
+                        "/editMode",
+                        true
+                    );
 
-        MessageToast.show(
-            "Request validated successfully"
-        );
+                this._loadRequest(
+                    this.getView()
+                        .getModel("detail")
+                        .getProperty("/requestId")
+                );
+            },
+            onSave: function () {
 
-        await this._loadRequest(
-            sRequestId
-        );
+                MessageToast.show(
+                    "Changes Saved Successfully"
+                );
 
-    } catch (oError) {
+                this.getView()
+                    .getModel("state")
+                    .setProperty(
+                        "/editMode",
+                        false
+                    );
 
-        console.error(oError);
-
-        MessageBox.error(
-            this._getErrorText(oError)
-        );
-
-    } finally {
-
-        oStateModel.setProperty(
-            "/busy",
-            false
-        );
-    }
-},
-onEdit: function () {
-
-    this.getView()
-        .getModel("state")
-        .setProperty(
-            "/editMode",
-            true
-        );
-
-    this._loadRequest(
-        this.getView()
-            .getModel("detail")
-            .getProperty("/requestId")
-    );
-},
-onSave: function () {
-
-    MessageToast.show(
-        "Changes Saved Successfully"
-    );
-
-    this.getView()
-        .getModel("state")
-        .setProperty(
-            "/editMode",
-            false
-        );
-
-    this._loadRequest(
-        this.getView()
-            .getModel("detail")
-            .getProperty("/requestId")
-    );
-},
+                this._loadRequest(
+                    this.getView()
+                        .getModel("detail")
+                        .getProperty("/requestId")
+                );
+            },
             onAttachmentPress: function () {
                 MessageToast.show(
                     "Attachment download will be enabled after the attachment backend service is connected"
@@ -711,350 +712,350 @@ onSave: function () {
             },
             onValidate: function () {
 
-    var sRequestId =
-        this.getView()
-            .getModel("detail")
-            .getProperty("/requestId");
+                var sRequestId =
+                    this.getView()
+                        .getModel("detail")
+                        .getProperty("/requestId");
 
-    this._executeApprove(
-        sRequestId
-    );
-},
-onSimulate: function () {
+                this._executeApprove(
+                    sRequestId
+                );
+            },
+            onSimulate: function () {
 
-    var sRequestId =
-        this.getView()
-            .getModel("detail")
-            .getProperty("/requestId");
+                var sRequestId =
+                    this.getView()
+                        .getModel("detail")
+                        .getProperty("/requestId");
 
-    MessageBox.confirm(
-        "Start simulation for request " +
-        sRequestId + "?",
-        {
-            title: "Start Simulation",
+                MessageBox.confirm(
+                    "Start simulation for request " +
+                    sRequestId + "?",
+                    {
+                        title: "Start Simulation",
 
-            actions: [
-                MessageBox.Action.OK,
-                MessageBox.Action.CANCEL
-            ],
+                        actions: [
+                            MessageBox.Action.OK,
+                            MessageBox.Action.CANCEL
+                        ],
 
-            onClose: function (sAction) {
+                        onClose: function (sAction) {
 
-                if (
-                    sAction ===
-                    MessageBox.Action.OK
+                            if (
+                                sAction ===
+                                MessageBox.Action.OK
+                            ) {
+
+                                this._executeSimulation(
+                                    sRequestId
+                                );
+
+                            }
+
+                        }.bind(this)
+                    }
+                );
+            },
+            _executeSimulation:
+                async function (
+                    sRequestId
                 ) {
 
-                    this._executeSimulation(
-                        sRequestId
-                    );
+                    BusyIndicator.show(0);
 
-                }
+                    try {
 
-            }.bind(this)
-        }
-    );
-},
-_executeSimulation:
-async function (
-    sRequestId
-) {
+                        var oModel =
+                            this.getOwnerComponent()
+                                .getModel();
 
-    BusyIndicator.show(0);
+                        var sPath =
+                            "/RequestHeader('" +
+                            this._encodeODataKey(
+                                sRequestId
+                            ) +
+                            "')/" +
+                            "com.sap.gateway.srvd." +
+                            "zui_epm_md_frontend." +
+                            "v0001.SimulateRequest(...)";
 
-    try {
-
-        var oModel =
-            this.getOwnerComponent()
-                .getModel();
-
-        var sPath =
-            "/RequestHeader('" +
-            this._encodeODataKey(
-                sRequestId
-            ) +
-            "')/" +
-            "com.sap.gateway.srvd." +
-            "zui_epm_md_frontend." +
-            "v0001.SimulateRequest(...)";
-
-        var oAction =
-            oModel.bindContext(
-                sPath,
-                null,
-                {
-                    $$updateGroupId:
-                        "$direct"
-                }
-            );
-
-        await oAction.execute(
-            "$direct"
-        );
-
-        MessageToast.show(
-            "Simulation was scheduled successfully."
-        );
-
-        await this._loadRequest(
-            sRequestId
-        );
-
-    } catch (oError) {
-
-        MessageBox.error(
-            this._getErrorText(oError)
-        );
-
-    } finally {
-
-        BusyIndicator.hide();
-
-    }
-},
-onViewSimulationLog:
-function () {
-
-    var sUrl =
-        this.getView()
-            .getModel("detail")
-            .getProperty(
-                "/simulationLogUrl"
-            );
-
-    if (!sUrl) {
-
-        MessageBox.information(
-            "The simulation log is not available yet. Refresh shortly."
-        );
-
-        return;
-    }
-
-    sap.m.URLHelper.redirect(
-        sUrl,
-        true
-    );
-},onRejectRequest: function () {
-
-    var oRequest =
-        this.getView()
-            .getModel("detail")
-            .getData();
-
-    if (!oRequest || !oRequest.requestId) {
-
-        MessageBox.error(
-            "Request ID is missing."
-        );
-
-        return;
-    }
-
-    this._oRejectRequest = oRequest;
-
-    this._openRejectDialog();
-},_openRejectDialog: function () {
-
-    var oReasonTextArea =
-        new TextArea({
-            width: "100%",
-            rows: 3,
-            maxLength: 255,
-            placeholder:
-                "Enter rejection reason"
-        });
-
-    var oCommentsTextArea =
-        new TextArea({
-            width: "100%",
-            rows: 4,
-            maxLength: 255,
-            placeholder:
-                "Enter optional comments"
-        });
-
-    var oDialog =
-        new Dialog({
-
-            title: "Reject Request",
-
-            contentWidth: "32rem",
-
-            content: [
-
-                new VBox({
-
-                    items: [
-
-                        new Label({
-    text: "Rejection Reason",
-    required: true
-}),
-                        oReasonTextArea,
-
-                        new Label({
-    text: "Comments"
-}).addStyleClass(
-    "sapUiSmallMarginTop"
-),
-
-                        oCommentsTextArea
-                    ]
-                })
-            ],
-
-            beginButton:
-
-                new Button({
-
-                    text: "Reject",
-
-                    type: "Reject",
-
-                    press: function () {
-
-                        var sReason =
-                            oReasonTextArea
-                                .getValue()
-                                .trim();
-
-                        var sComments =
-                            oCommentsTextArea
-                                .getValue()
-                                .trim();
-
-                        if (!sReason) {
-
-                            MessageBox.error(
-                                "Rejection Reason is mandatory."
+                        var oAction =
+                            oModel.bindContext(
+                                sPath,
+                                null,
+                                {
+                                    $$updateGroupId:
+                                        "$direct"
+                                }
                             );
 
-                            return;
-                        }
-
-                        this._confirmRejectRequest(
-                            sReason,
-                            sComments,
-                            oDialog
+                        await oAction.execute(
+                            "$direct"
                         );
 
-                    }.bind(this)
-                }),
+                        MessageToast.show(
+                            "Simulation was scheduled successfully."
+                        );
 
-            endButton:
+                        await this._loadRequest(
+                            sRequestId
+                        );
 
-                new Button({
+                    } catch (oError) {
 
-                    text: "Cancel",
+                        MessageBox.error(
+                            this._getErrorText(oError)
+                        );
 
-                    press: function () {
-                        oDialog.close();
+                    } finally {
+
+                        BusyIndicator.hide();
+
                     }
-                }),
+                },
+            onViewSimulationLog:
+                function () {
 
-            afterClose: function () {
-                oDialog.destroy();
-            }
-        });
+                    var sUrl =
+                        this.getView()
+                            .getModel("detail")
+                            .getProperty(
+                                "/simulationLogUrl"
+                            );
 
-    this.getView().addDependent(
-        oDialog
-    );
+                    if (!sUrl) {
 
-    oDialog.open();
-},
-_confirmRejectRequest: async function (
-    sReason,
-    sComments,
-    oDialog
-) {
+                        MessageBox.information(
+                            "The simulation log is not available yet. Refresh shortly."
+                        );
 
-    BusyIndicator.show(0);
+                        return;
+                    }
 
-    try {
+                    sap.m.URLHelper.redirect(
+                        sUrl,
+                        true
+                    );
+                }, onRejectRequest: function () {
 
-        await this._executeRejectRequest(
-            this._oRejectRequest.requestId,
-            sReason,
-            sComments
-        );
+                    var oRequest =
+                        this.getView()
+                            .getModel("detail")
+                            .getData();
 
-        oDialog.close();
+                    if (!oRequest || !oRequest.requestId) {
 
-        MessageBox.success(
-            "Request rejected successfully."
-        );
+                        MessageBox.error(
+                            "Request ID is missing."
+                        );
 
-        await this._loadRequest(
-            this._oRejectRequest.requestId
-        );
+                        return;
+                    }
 
-    } catch (oError) {
+                    this._oRejectRequest = oRequest;
 
-        MessageBox.error(
-            this._getErrorText(oError)
-        );
+                    this._openRejectDialog();
+                }, _openRejectDialog: function () {
 
-    } finally {
+                    var oReasonTextArea =
+                        new TextArea({
+                            width: "100%",
+                            rows: 3,
+                            maxLength: 255,
+                            placeholder:
+                                "Enter rejection reason"
+                        });
 
-        BusyIndicator.hide();
-    }
-},_executeRejectRequest:
-    async function (
-        sRequestId,
-        sReason,
-        sComments
-    ) {
+                    var oCommentsTextArea =
+                        new TextArea({
+                            width: "100%",
+                            rows: 4,
+                            maxLength: 255,
+                            placeholder:
+                                "Enter optional comments"
+                        });
 
-    var oModel =
-        this.getOwnerComponent()
-            .getModel();
+                    var oDialog =
+                        new Dialog({
 
-    var sActionPath =
+                            title: "Reject Request",
 
-        "/RequestHeader('" +
+                            contentWidth: "32rem",
 
-        this._encodeODataKey(
-            sRequestId
-        ) +
+                            content: [
 
-        "')/" +
+                                new VBox({
 
-        "com.sap.gateway.srvd." +
+                                    items: [
 
-        "zui_epm_md_frontend." +
+                                        new Label({
+                                            text: "Rejection Reason",
+                                            required: true
+                                        }),
+                                        oReasonTextArea,
 
-        "v0001.RejectRequest(...)";
+                                        new Label({
+                                            text: "Comments"
+                                        }).addStyleClass(
+                                            "sapUiSmallMarginTop"
+                                        ),
 
-    var oActionBinding =
+                                        oCommentsTextArea
+                                    ]
+                                })
+                            ],
 
-        oModel.bindContext(
+                            beginButton:
 
-            sActionPath,
+                                new Button({
 
-            null,
+                                    text: "Reject",
 
-            {
-                $$updateGroupId:
-                    "$direct"
-            }
-        );
+                                    type: "Reject",
 
-    oActionBinding.setParameter(
-        "RejectionReason",
-        sReason
-    );
+                                    press: function () {
 
-    oActionBinding.setParameter(
-        "Comments",
-        sComments || ""
-    );
+                                        var sReason =
+                                            oReasonTextArea
+                                                .getValue()
+                                                .trim();
 
-    await oActionBinding.execute(
-        "$direct"
-    );
-},
+                                        var sComments =
+                                            oCommentsTextArea
+                                                .getValue()
+                                                .trim();
+
+                                        if (!sReason) {
+
+                                            MessageBox.error(
+                                                "Rejection Reason is mandatory."
+                                            );
+
+                                            return;
+                                        }
+
+                                        this._confirmRejectRequest(
+                                            sReason,
+                                            sComments,
+                                            oDialog
+                                        );
+
+                                    }.bind(this)
+                                }),
+
+                            endButton:
+
+                                new Button({
+
+                                    text: "Cancel",
+
+                                    press: function () {
+                                        oDialog.close();
+                                    }
+                                }),
+
+                            afterClose: function () {
+                                oDialog.destroy();
+                            }
+                        });
+
+                    this.getView().addDependent(
+                        oDialog
+                    );
+
+                    oDialog.open();
+                },
+            _confirmRejectRequest: async function (
+                sReason,
+                sComments,
+                oDialog
+            ) {
+
+                BusyIndicator.show(0);
+
+                try {
+
+                    await this._executeRejectRequest(
+                        this._oRejectRequest.requestId,
+                        sReason,
+                        sComments
+                    );
+
+                    oDialog.close();
+
+                    MessageBox.success(
+                        "Request rejected successfully."
+                    );
+
+                    await this._loadRequest(
+                        this._oRejectRequest.requestId
+                    );
+
+                } catch (oError) {
+
+                    MessageBox.error(
+                        this._getErrorText(oError)
+                    );
+
+                } finally {
+
+                    BusyIndicator.hide();
+                }
+            }, _executeRejectRequest:
+                async function (
+                    sRequestId,
+                    sReason,
+                    sComments
+                ) {
+
+                    var oModel =
+                        this.getOwnerComponent()
+                            .getModel();
+
+                    var sActionPath =
+
+                        "/RequestHeader('" +
+
+                        this._encodeODataKey(
+                            sRequestId
+                        ) +
+
+                        "')/" +
+
+                        "com.sap.gateway.srvd." +
+
+                        "zui_epm_md_frontend." +
+
+                        "v0001.RejectRequest(...)";
+
+                    var oActionBinding =
+
+                        oModel.bindContext(
+
+                            sActionPath,
+
+                            null,
+
+                            {
+                                $$updateGroupId:
+                                    "$direct"
+                            }
+                        );
+
+                    oActionBinding.setParameter(
+                        "RejectionReason",
+                        sReason
+                    );
+
+                    oActionBinding.setParameter(
+                        "Comments",
+                        sComments || ""
+                    );
+
+                    await oActionBinding.execute(
+                        "$direct"
+                    );
+                },
             onNavBack: function () {
                 var sPreviousHash =
                     History.getInstance()
@@ -1155,9 +1156,9 @@ _confirmRejectRequest: async function (
                     wbsItems: [],
                     attachments: [],
                     simulationStatus: "",
-simulationSpoolNumber: "",
-simulationLogUrl: "",
-showSimulationLink: false,
+                    simulationSpoolNumber: "",
+                    simulationLogUrl: "",
+                    showSimulationLink: false,
                 };
             },
 
@@ -1228,7 +1229,7 @@ showSimulationLink: false,
                 return mStatus[sWorkflowStep] || {
                     text: sWorkflowStep
                         ? "Workflow Step " +
-                          sWorkflowStep
+                        sWorkflowStep
                         : "Unknown",
                     state: "None"
                 };
