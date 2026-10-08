@@ -39,6 +39,28 @@
                     <Label id="_IDGenLabel1" text="Action Type" design="Bold"/>
 
                     <Text id="_IDGenText12" text="{detail>/actionTypeDisplay}"/>
+<VBox id="_IDGenVBox7" class="sapUiSmallMarginTop">
+
+    <HBox id="_IDGenHBox3"
+        justifyContent="End"
+        visible="{detail>/showSimulateButton}">
+
+        <Button id="_IDGenButton7"
+            icon="sap-icon://edit"
+            text="Edit"
+            visible="{= !${state>/editMode} }"
+            press="onEdit"/>
+
+        <Button id="_IDGenButton8"
+            icon="sap-icon://save"
+            text="Save"
+            type="Emphasized"
+            visible="{state>/editMode}"
+            press="onSave"/>
+
+    </HBox>
+
+</VBox>
 
                 </VBox>
 

@@ -13,7 +13,8 @@ sap.ui.define([
 "sap/m/TextArea",
 "sap/m/Button",
 "sap/m/VBox",
-"sap/ui/core/BusyIndicator"
+"sap/ui/core/BusyIndicator",
+"sap/m/Input"
 ], function (
     Controller,
     JSONModel,
@@ -29,7 +30,8 @@ Dialog,
 TextArea,
 Button,
 VBox,
-BusyIndicator
+BusyIndicator,
+Input
 ) {
     "use strict";
 
@@ -47,7 +49,8 @@ BusyIndicator
                 this.getView().setModel(
                     new JSONModel({
                         busy: false,
-                        canApprove: false
+                        canApprove: false,
+                        editMode: false
                     }),
                     "state"
                 );
@@ -240,11 +243,26 @@ oDetailData.showCloseButton =
                             sObjectKey
                         ] = aRows.length > 0;
 
-                        this._renderReadOnlyTable(
-                            sObjectKey,
-                            aRows
-                        );
-                    }
+                       if (
+    sWorkflowStep === "035" &&
+    this.getView()
+        .getModel("state")
+        .getProperty("/editMode")
+) {
+
+    this._renderEditableTable(
+        sObjectKey,
+        aRows
+    );
+
+} else {
+
+    this._renderReadOnlyTable(
+        sObjectKey,
+        aRows
+    );
+
+}}
 
                     oDetailModel.setData(oDetailData);
 
@@ -385,7 +403,107 @@ oDetailData.showCloseButton =
 
                 oContainer.addItem(oTable);
             },
+_renderEditableTable: function (
+    sObjectKey,
+    aRows
+) {
 
+    var oConfiguration =
+        this._getEntityConfiguration()[
+            sObjectKey
+        ];
+
+    var oContainer =
+        this.byId(
+            oConfiguration.containerId
+        );
+
+    if (!oContainer) {
+        return;
+    }
+
+    oContainer.destroyItems();
+
+    if (!aRows || aRows.length === 0) {
+        return;
+    }
+
+    var aProperties =
+        this._getDisplayProperties(
+            aRows
+        );
+
+    var oTable = new Table({
+
+        width: Math.max(
+            60,
+            aProperties.length * 11
+        ) + "rem",
+
+        fixedLayout: true
+
+    });
+
+    aProperties.forEach(
+        function (sPropertyName) {
+
+            oTable.addColumn(
+                new Column({
+
+                    width: "11rem",
+
+                    header:
+                        new Label({
+
+                            text:
+                                this._getPropertyLabel(
+                                    sPropertyName
+                                )
+
+                        })
+
+                })
+            );
+
+        }.bind(this)
+    );
+
+    aRows.forEach(
+        function (oRow) {
+
+            var aCells =
+                aProperties.map(
+                    function (sPropertyName) {
+
+                        return new Input({
+
+                            value:
+                                String(
+                                    oRow[
+                                        sPropertyName
+                                    ] || ""
+                                )
+
+                        });
+
+                    }
+                );
+
+            oTable.addItem(
+                new ColumnListItem({
+
+                    cells: aCells
+
+                })
+            );
+
+        }
+    );
+
+    oContainer.addItem(
+        oTable
+    );
+},
             _getDisplayProperties: function (aRows) {
                 var aProperties = [];
 
@@ -499,74 +617,109 @@ oDetailData.showCloseButton =
                 );
             },
 
-            _executeApprove: async function (
-                sRequestId
-            ) {
-                var oStateModel =
-                    this.getView().getModel("state");
+           _executeApprove: async function (sRequestId) {
 
-                oStateModel.setProperty("/busy", true);
-                oStateModel.setProperty(
-                    "/canApprove",
-                    false
-                );
+    var oStateModel =
+        this.getView().getModel("state");
 
-                try {
-                    var oODataModel =
-                        this.getOwnerComponent().getModel();
+    oStateModel.setProperty("/busy", true);
 
-                    var sActionPath =
-                        "/RequestHeader('" +
-                        this._encodeODataKey(sRequestId) +
-                        "')/" +
-                        "com.sap.gateway.srvd.zui_epm_md_frontend.v0001.ApproveRequest(...)";
+    try {
 
-var oActionBinding =
-    oODataModel.bindContext(
-        sActionPath
+        var oODataModel =
+            this.getOwnerComponent().getModel();
+
+        var sActionPath =
+            "/RequestHeader('" +
+            this._encodeODataKey(sRequestId) +
+            "')/" +
+            "com.sap.gateway.srvd.zui_epm_md_frontend.v0001.ApproveRequest(...)";
+
+        var oActionBinding =
+            oODataModel.bindContext(
+                sActionPath,
+                null,
+                {
+                    $$updateGroupId: "$direct"
+                }
+            );
+
+        await oActionBinding.execute("$direct");
+
+        MessageToast.show(
+            "Request validated successfully"
+        );
+
+        await this._loadRequest(
+            sRequestId
+        );
+
+    } catch (oError) {
+
+        console.error(oError);
+
+        MessageBox.error(
+            this._getErrorText(oError)
+        );
+
+    } finally {
+
+        oStateModel.setProperty(
+            "/busy",
+            false
+        );
+    }
+},
+onEdit: function () {
+
+    this.getView()
+        .getModel("state")
+        .setProperty(
+            "/editMode",
+            true
+        );
+
+    this._loadRequest(
+        this.getView()
+            .getModel("detail")
+            .getProperty("/requestId")
+    );
+},
+onSave: function () {
+
+    MessageToast.show(
+        "Changes Saved Successfully"
     );
 
-await oActionBinding.invoke();
+    this.getView()
+        .getModel("state")
+        .setProperty(
+            "/editMode",
+            false
+        );
 
-                    MessageToast.show(
-                        "Request approved successfully"
-                    );
-
-                    await this._loadRequest(
-                        sRequestId
-                    );
-                } catch (oError) {
-                    MessageBox.error(
-                        "Approval failed.\n\n" +
-                        this._getErrorText(oError)
-                    );
-
-                    var sCurrentStep =
-                        this.getView()
-                            .getModel("detail")
-                            .getProperty(
-                                "/workflowStep"
-                            );
-
-                    oStateModel.setProperty(
-                        "/canApprove",
-                        this._isApprovalStep(
-                            sCurrentStep
-                        )
-                    );
-                } finally {
-                    oStateModel.setProperty(
-                        "/busy",
-                        false
-                    );
-                }
-            },
-
+    this._loadRequest(
+        this.getView()
+            .getModel("detail")
+            .getProperty("/requestId")
+    );
+},
             onAttachmentPress: function () {
                 MessageToast.show(
                     "Attachment download will be enabled after the attachment backend service is connected"
                 );
             },
+            onValidate: function () {
+
+    var sRequestId =
+        this.getView()
+            .getModel("detail")
+            .getProperty("/requestId");
+
+    this._executeApprove(
+        sRequestId
+    );
+},
 onSimulate: function () {
 
     var sRequestId =
