@@ -310,7 +310,16 @@ sap.ui.define([
 
                 return aContexts.map(
                     function (oContext) {
-                        return oContext.getObject();
+
+                        return Object.assign(
+                            {},
+                            oContext.getObject(),
+                            {
+                                __contextPath:
+                                    oContext.getPath()
+                            }
+                        );
+
                     }
                 );
             },
@@ -480,10 +489,15 @@ sap.ui.define([
 
                                         value:
                                             String(
-                                                oRow[
-                                                sPropertyName
-                                                ] || ""
-                                            )
+                                                oRow[sPropertyName] || ""
+                                            ),
+
+                                        change: function (oEvent) {
+
+                                            oRow[sPropertyName] =
+                                                oEvent.getSource().getValue();
+
+                                        }
 
                                     });
 
@@ -686,24 +700,119 @@ sap.ui.define([
                         .getProperty("/requestId")
                 );
             },
-            onSave: function () {
+            _updateSavedRow: async function (
+                oRow,
+                aFields
+            ) {
 
-                MessageToast.show(
-                    "Changes Saved Successfully"
-                );
+                var sUpdateGroupId =
+                    "rep050App2Update";
 
-                this.getView()
-                    .getModel("state")
-                    .setProperty(
-                        "/editMode",
-                        false
+                var oModel =
+                    this.getOwnerComponent()
+                        .getModel();
+
+                var oContextBinding =
+                    oModel.bindContext(
+                        oRow.__contextPath,
+                        null,
+                        {
+                            $$updateGroupId:
+                                sUpdateGroupId
+                        }
                     );
 
-                this._loadRequest(
-                    this.getView()
-                        .getModel("detail")
-                        .getProperty("/requestId")
+                await oContextBinding.requestObject();
+
+                var oContext =
+                    oContextBinding.getBoundContext();
+
+                aFields.forEach(
+                    function (sField) {
+
+                        if (
+                            sField === "RequestId" ||
+                            sField === "ItemNo" ||
+                            sField.indexOf("__") === 0
+                        ) {
+                            return;
+                        }
+
+                        if (
+                            typeof oRow[sField] !==
+                            "object"
+                        ) {
+
+                            oContext.setProperty(
+                                sField,
+                                oRow[sField]
+                            );
+
+                        }
+                    }
                 );
+
+                await oModel.submitBatch(
+                    sUpdateGroupId
+                );
+            },
+            onSave: async function () {
+
+                try {
+
+                    var oDetailModel =
+                        this.getView().getModel("detail");
+
+                    var aCollections = [
+
+                        oDetailModel.getProperty("/profitCenters") || [],
+                        oDetailModel.getProperty("/geoSites") || [],
+                        oDetailModel.getProperty("/costCenters") || [],
+                        oDetailModel.getProperty("/projects") || [],
+                        oDetailModel.getProperty("/wbsItems") || []
+
+                    ];
+
+                    for (var i = 0; i < aCollections.length; i++) {
+
+                        var aRows = aCollections[i];
+
+                        for (var j = 0; j < aRows.length; j++) {
+
+                            await this._updateSavedRow(
+                                aRows[j],
+                                Object.keys(aRows[j])
+                            );
+
+                        }
+                    }
+
+                    MessageToast.show(
+                        "Changes Saved Successfully"
+                    );
+
+                    this.getView()
+                        .getModel("state")
+                        .setProperty(
+                            "/editMode",
+                            false
+                        );
+
+                    await this._loadRequest(
+                        oDetailModel.getProperty(
+                            "/requestId"
+                        )
+                    );
+
+                } catch (oError) {
+
+                    console.error(oError);
+
+                    MessageBox.error(
+                        oError.message
+                    );
+
+                }
             },
             onAttachmentPress: function () {
                 MessageToast.show(
